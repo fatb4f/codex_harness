@@ -1,0 +1,105 @@
+{
+  "kind": "rollout_harness_overlay_matrix.v1",
+  "generated_at": "2026-03-14T16:16:57-04:00",
+  "rollout_order": [
+    "T0_runtime_evidence_freeze",
+    "T1_operator_led_staging",
+    "T2_typed_client_parity",
+    "T3_approval_gated_shared_control",
+    "T4_remote_surface_parity",
+    "T5_source_regression_lane"
+  ],
+  "harness_order": [
+    "H0_baseline_runtime_probe",
+    "H1_runtime_state_isolation",
+    "H2_live_approval_roundtrip",
+    "H3_live_collaboration_roundtrip",
+    "H4_python_app_server_client_lane",
+    "H5_typescript_app_server_client_lane",
+    "H6_typescript_codex_sdk_smoke",
+    "H7_remote_surface_observation",
+    "H8_source_lane_comparison",
+    "H9_release_regression_pack"
+  ],
+  "matrix": {
+    "T0_runtime_evidence_freeze": {
+      "H0_baseline_runtime_probe": "required",
+      "H1_runtime_state_isolation": "supporting",
+      "H2_live_approval_roundtrip": "deferred",
+      "H3_live_collaboration_roundtrip": "deferred",
+      "H4_python_app_server_client_lane": "supporting",
+      "H5_typescript_app_server_client_lane": "deferred",
+      "H6_typescript_codex_sdk_smoke": "deferred",
+      "H7_remote_surface_observation": "not_applicable",
+      "H8_source_lane_comparison": "deferred",
+      "H9_release_regression_pack": "not_applicable"
+    },
+    "T1_operator_led_staging": {
+      "H0_baseline_runtime_probe": "required",
+      "H1_runtime_state_isolation": "required",
+      "H2_live_approval_roundtrip": "supporting",
+      "H3_live_collaboration_roundtrip": "supporting",
+      "H4_python_app_server_client_lane": "required",
+      "H5_typescript_app_server_client_lane": "supporting",
+      "H6_typescript_codex_sdk_smoke": "optional",
+      "H7_remote_surface_observation": "not_applicable",
+      "H8_source_lane_comparison": "optional",
+      "H9_release_regression_pack": "deferred"
+    },
+    "T2_typed_client_parity": {
+      "H0_baseline_runtime_probe": "required",
+      "H1_runtime_state_isolation": "supporting",
+      "H2_live_approval_roundtrip": "supporting",
+      "H3_live_collaboration_roundtrip": "supporting",
+      "H4_python_app_server_client_lane": "required",
+      "H5_typescript_app_server_client_lane": "required",
+      "H6_typescript_codex_sdk_smoke": "required",
+      "H7_remote_surface_observation": "optional",
+      "H8_source_lane_comparison": "supporting",
+      "H9_release_regression_pack": "deferred"
+    },
+    "T3_approval_gated_shared_control": {
+      "H0_baseline_runtime_probe": "required",
+      "H1_runtime_state_isolation": "required",
+      "H2_live_approval_roundtrip": "required",
+      "H3_live_collaboration_roundtrip": "required",
+      "H4_python_app_server_client_lane": "supporting",
+      "H5_typescript_app_server_client_lane": "supporting",
+      "H6_typescript_codex_sdk_smoke": "supporting",
+      "H7_remote_surface_observation": "supporting",
+      "H8_source_lane_comparison": "optional",
+      "H9_release_regression_pack": "supporting"
+    },
+    "T4_remote_surface_parity": {
+      "H0_baseline_runtime_probe": "required",
+      "H1_runtime_state_isolation": "required",
+      "H2_live_approval_roundtrip": "required",
+      "H3_live_collaboration_roundtrip": "required",
+      "H4_python_app_server_client_lane": "supporting",
+      "H5_typescript_app_server_client_lane": "supporting",
+      "H6_typescript_codex_sdk_smoke": "supporting",
+      "H7_remote_surface_observation": "required",
+      "H8_source_lane_comparison": "optional",
+      "H9_release_regression_pack": "supporting"
+    },
+    "T5_source_regression_lane": {
+      "H0_baseline_runtime_probe": "required",
+      "H1_runtime_state_isolation": "required",
+      "H2_live_approval_roundtrip": "supporting",
+      "H3_live_collaboration_roundtrip": "supporting",
+      "H4_python_app_server_client_lane": "supporting",
+      "H5_typescript_app_server_client_lane": "supporting",
+      "H6_typescript_codex_sdk_smoke": "supporting",
+      "H7_remote_surface_observation": "optional",
+      "H8_source_lane_comparison": "required",
+      "H9_release_regression_pack": "required"
+    }
+  },
+  "legend": {
+    "required": "Must exist before the rollout tier can be considered complete.",
+    "supporting": "Substantially improves confidence or ergonomics for the rollout tier.",
+    "optional": "Useful but not blocking for the rollout tier.",
+    "deferred": "Intentionally left for a later tier.",
+    "not_applicable": "Not relevant to the rollout tier."
+  }
+}
