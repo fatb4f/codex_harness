@@ -57,8 +57,8 @@
         "thread persistence and metadata"
       ],
       "evidence_basis": [
-        "/home/_404/src/app_server_validation_harness/validation_samples/baseline/harness.event_matrix.json",
-        "/home/_404/src/app_server_validation_harness/validation_samples/baseline/harness.review.md"
+        "/home/_404/src/codex_harness/validation_samples/baseline/harness.event_matrix.json",
+        "/home/_404/src/codex_harness/validation_samples/baseline/harness.review.md"
       ]
     },
     {
@@ -79,7 +79,7 @@
         "operator entrypoint for installed-runtime probing"
       ],
       "evidence_basis": [
-        "/home/_404/src/app_server_validation_harness/validation_samples/baseline/harness.run_summary.json"
+        "/home/_404/src/codex_harness/validation_samples/baseline/harness.run_summary.json"
       ]
     },
     {
@@ -157,7 +157,7 @@
         "runtime-safe scenario automation"
       ],
       "evidence_basis": [
-        "/home/_404/src/app_server_validation_harness/runtime_probe.py"
+        "/home/_404/src/codex_harness/runtime_probe.py"
       ],
       "notes": "This exists today as the standalone runtime probe rather than an official packaged SDK."
     },
