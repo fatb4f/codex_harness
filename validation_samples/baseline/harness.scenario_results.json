@@ -1,0 +1,74 @@
+[
+  {
+    "group": "bootstrap",
+    "status": "passed",
+    "detail": "installed bootstrap passed. userAgent=codex_app_server_runtime_probe/0.112.0 (Arch Linux Unknown; x86_64) kitty (codex_app_server_runtime_probe; 0.1.0), configRead=yes, collaborationModes=2, threadId=019cedd2-57c8-78d1-b2db-d54b3293d843.",
+    "duration_ms": 725,
+    "command": [
+      "codex",
+      "app-server",
+      "--listen",
+      "stdio://"
+    ]
+  },
+  {
+    "group": "threads",
+    "status": "passed",
+    "detail": "persistent thread lifecycle passed. threadId=019cedd2-5acb-78b3-b60b-d3825db93482, materializedTurnId=019cedd2-5cc7-72e3-83c9-181c12196810, forkedThreadId=019cedd2-7a46-7282-ac21-f682ee41bf9b, loadedCount=2, listedCount=20.",
+    "duration_ms": 9049,
+    "command": [
+      "codex",
+      "app-server",
+      "--listen",
+      "stdio://"
+    ]
+  },
+  {
+    "group": "turns",
+    "status": "passed",
+    "detail": "turn lifecycle and output shaping passed. threadId=019cedd2-7e4b-7170-b402-64ea687aab25, turnId=019cedd2-7e76-7003-9051-3c44ee0f7b55, turnStatus=completed, turnSteerErrorCode=-32600.",
+    "duration_ms": 4980,
+    "command": [
+      "codex",
+      "app-server",
+      "--listen",
+      "stdio://"
+    ]
+  },
+  {
+    "group": "collaboration",
+    "status": "passed",
+    "detail": "collaboration discovery passed. modes=['Plan', 'Default'], enabledFeatures=['shell_tool', 'unified_exec', 'shell_snapshot', 'sqlite', 'enable_request_compression', 'multi_agent', 'skill_mcp_dependency_install', 'steer', 'collaboration_modes', 'personality', 'fast_mode'], planTurnId=019cedd2-91b2-78c3-be15-eac0f52309db.",
+    "duration_ms": 2510,
+    "command": [
+      "codex",
+      "app-server",
+      "--listen",
+      "stdio://"
+    ]
+  },
+  {
+    "group": "approvals",
+    "status": "partial",
+    "detail": "approval and user-input surface discovery was partial. threadId=019cedd2-9b56-7c52-b6a5-c4091cfb7c24, turnId=019cedd2-9b6a-7653-bff9-9456469a1fd8, enabledFeatures=['shell_tool', 'unified_exec', 'shell_snapshot', 'sqlite', 'enable_request_compression', 'multi_agent', 'skill_mcp_dependency_install', 'steer', 'collaboration_modes', 'personality', 'fast_mode'], serverRequests=[], serverRequestResolved=no, configLayers=yes.",
+    "duration_ms": 19148,
+    "command": [
+      "codex",
+      "app-server",
+      "--listen",
+      "stdio://"
+    ]
+  },
+  {
+    "group": "persistence",
+    "status": "passed",
+    "detail": "thread metadata persistence passed. threadId=019cedd2-e614-79f1-8aae-b16a1672d241, branch=runtime-probe/persistence.",
+    "duration_ms": 765,
+    "command": [
+      "codex",
+      "app-server",
+      "--listen",
+      "stdio://"
+    ]
+  }
+]

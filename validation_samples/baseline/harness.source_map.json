@@ -1,0 +1,26 @@
+[
+  {
+    "name": "protocol",
+    "role": "authoritative app-server request/response/event types",
+    "source_path": "app-server-protocol",
+    "notes": "Use this for schema and type authority; do not retype the protocol."
+  },
+  {
+    "name": "runtime_driver",
+    "role": "reference process driver for app-server stdio sessions",
+    "source_path": "app-server/tests/common/mcp_process.rs",
+    "notes": "Use this as the source-lane reference; the runtime probe talks to the installed codex app-server binary directly."
+  },
+  {
+    "name": "scenario_library",
+    "role": "existing app-server v2 scenario coverage",
+    "source_path": "app-server/tests/suite/v2",
+    "notes": "Reuse these scenarios as semantic references instead of inventing a new taxonomy."
+  },
+  {
+    "name": "persistence_layer",
+    "role": "rollout and state readback validation",
+    "source_path": "state",
+    "notes": "Reserved for follow-up persistence packs."
+  }
+]

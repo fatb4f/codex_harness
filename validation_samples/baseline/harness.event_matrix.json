@@ -1,0 +1,196 @@
+{
+  "mode": "runtime_baseline",
+  "server_mode": "installed",
+  "observations": [
+    {
+      "scenario_group": "bootstrap",
+      "status": "passed",
+      "request_methods": [
+        "initialize",
+        "config/read",
+        "collaborationMode/list",
+        "thread/start"
+      ],
+      "notification_methods": [
+        "thread/started",
+        "codex/event/mcp_startup_complete"
+      ],
+      "server_request_methods": [],
+      "notes": [
+        "Sent initialized notification."
+      ],
+      "stderr": []
+    },
+    {
+      "scenario_group": "threads",
+      "status": "passed",
+      "request_methods": [
+        "initialize",
+        "thread/start",
+        "turn/start",
+        "thread/resume",
+        "thread/fork",
+        "thread/read",
+        "thread/loaded/list",
+        "thread/list"
+      ],
+      "notification_methods": [
+        "thread/started",
+        "codex/event/mcp_startup_complete",
+        "codex/event/task_started",
+        "thread/status/changed",
+        "turn/started",
+        "codex/event/item_started",
+        "item/started",
+        "codex/event/item_completed",
+        "item/completed",
+        "codex/event/user_message",
+        "codex/event/agent_message_content_delta",
+        "item/agentMessage/delta",
+        "codex/event/agent_message_delta",
+        "codex/event/agent_message",
+        "codex/event/token_count",
+        "thread/tokenUsage/updated",
+        "codex/event/task_complete",
+        "turn/completed"
+      ],
+      "server_request_methods": [],
+      "notes": [
+        "Sent initialized notification.",
+        "Sent initialized notification."
+      ],
+      "stderr": []
+    },
+    {
+      "scenario_group": "turns",
+      "status": "passed",
+      "request_methods": [
+        "initialize",
+        "thread/start",
+        "turn/start",
+        "turn/steer"
+      ],
+      "notification_methods": [
+        "thread/started",
+        "codex/event/mcp_startup_complete",
+        "codex/event/task_started",
+        "thread/status/changed",
+        "turn/started",
+        "codex/event/item_started",
+        "item/started",
+        "codex/event/item_completed",
+        "item/completed",
+        "codex/event/user_message",
+        "codex/event/token_count",
+        "account/rateLimits/updated",
+        "codex/event/agent_message_content_delta",
+        "item/agentMessage/delta",
+        "codex/event/agent_message_delta",
+        "codex/event/agent_message",
+        "thread/tokenUsage/updated",
+        "codex/event/task_complete",
+        "turn/completed"
+      ],
+      "server_request_methods": [],
+      "notes": [
+        "Sent initialized notification.",
+        "Runtime lane validates turn/start + outputSchema and the inactive-turn steer guard. Interrupt remains a source-lane reference because it requires a deterministic active turn."
+      ],
+      "stderr": []
+    },
+    {
+      "scenario_group": "collaboration",
+      "status": "passed",
+      "request_methods": [
+        "initialize",
+        "config/read",
+        "collaborationMode/list",
+        "experimentalFeature/list",
+        "thread/start",
+        "turn/start"
+      ],
+      "notification_methods": [
+        "thread/started",
+        "codex/event/mcp_startup_complete",
+        "codex/event/task_started",
+        "thread/status/changed",
+        "turn/started",
+        "codex/event/item_started",
+        "item/started",
+        "codex/event/item_completed",
+        "item/completed",
+        "codex/event/user_message",
+        "codex/event/token_count",
+        "account/rateLimits/updated",
+        "codex/event/agent_message_content_delta",
+        "item/agentMessage/delta",
+        "codex/event/agent_message_delta",
+        "codex/event/agent_message",
+        "thread/tokenUsage/updated",
+        "codex/event/task_complete",
+        "turn/completed"
+      ],
+      "server_request_methods": [],
+      "notes": [
+        "Sent initialized notification."
+      ],
+      "stderr": []
+    },
+    {
+      "scenario_group": "approvals",
+      "status": "partial",
+      "request_methods": [
+        "initialize",
+        "config/read",
+        "experimentalFeature/list",
+        "thread/start",
+        "turn/start"
+      ],
+      "notification_methods": [
+        "thread/started",
+        "codex/event/mcp_startup_complete",
+        "codex/event/task_started",
+        "thread/status/changed",
+        "turn/started",
+        "codex/event/item_started",
+        "item/started",
+        "codex/event/item_completed",
+        "item/completed",
+        "codex/event/user_message",
+        "codex/event/agent_message_content_delta",
+        "item/agentMessage/delta",
+        "codex/event/agent_message_delta",
+        "codex/event/agent_message",
+        "codex/event/token_count",
+        "thread/tokenUsage/updated",
+        "codex/event/task_complete",
+        "turn/completed"
+      ],
+      "server_request_methods": [],
+      "notes": [
+        "Sent initialized notification.",
+        "No approval or request_user_input server request was emitted for the runtime prompt; treating this as partial surface discovery instead of a full approval validation pass."
+      ],
+      "stderr": []
+    },
+    {
+      "scenario_group": "persistence",
+      "status": "passed",
+      "request_methods": [
+        "initialize",
+        "thread/start",
+        "thread/metadata/update",
+        "thread/read"
+      ],
+      "notification_methods": [
+        "thread/started",
+        "codex/event/mcp_startup_complete"
+      ],
+      "server_request_methods": [],
+      "notes": [
+        "Sent initialized notification."
+      ],
+      "stderr": []
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "mode": "runtime_baseline",
+  "server_mode": "installed",
+  "server_command": [
+    "codex",
+    "app-server",
+    "--listen",
+    "stdio://"
+  ],
+  "codex_version": "codex-cli 0.112.0",
+  "selected_scenario_groups": [
+    "bootstrap",
+    "threads",
+    "turns",
+    "collaboration",
+    "approvals",
+    "persistence"
+  ],
+  "completed_scenarios": 5,
+  "partial_scenarios": 1,
+  "not_executed_scenarios": 0,
+  "failed_scenarios": 0,
+  "has_failures": false,
+  "duration_ms": 37307
+}
