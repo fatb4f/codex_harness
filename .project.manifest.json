@@ -14,39 +14,40 @@
   },
   "paths": {
     "root": ".",
-    "docs": "docs",
-    "prompts": "prompts",
-    "build_script": "build_overrides.sh",
-    "review_instructions": "docs/review_workspace_instructions.md",
-    "runtime_probe": "runtime_probe.py",
-    "review_templates": ".templates/reviews",
-    "baseline_samples": "validation_samples/baseline"
+    "product_docs": "docs",
+    "workspace_docs": ".workspace/docs",
+    "prompts": "src/prompts",
+    "build_script": ".workspace/scripts/build_overrides.sh",
+    "review_instructions": ".workspace/docs/review_workspace_instructions.md",
+    "runtime_probe": "src/runtime_probe.py",
+    "review_templates": ".workspace/templates/reviews",
+    "baseline_samples": "src/validation_samples/baseline"
   },
   "priority_files": [
-    "project.manifest.json",
+    ".project.manifest.json",
     "README.md",
-    "build_overrides.sh",
-    "docs/review_workspace_instructions.md",
-    "runtime_probe.py",
+    ".workspace/scripts/build_overrides.sh",
+    ".workspace/docs/review_workspace_instructions.md",
+    "src/runtime_probe.py",
     "docs/app_server_validation_harness.md",
-    "validation_samples/baseline/*",
-    ".templates/reviews/*"
+    "src/validation_samples/baseline/*",
+    ".workspace/templates/reviews/*"
   ],
   "scaffold": {
     "generated_files": [
       "AGENTS.md",
-      ".templates/reviews/codex_harness.review.schema.json",
-      ".templates/reviews/review.schema.json",
-      ".templates/reviews/review.json.template"
+      ".workspace/templates/reviews/codex_harness.review.schema.json",
+      ".workspace/templates/reviews/review.schema.json",
+      ".workspace/templates/reviews/review.json.template"
     ],
     "idempotent": true
   },
   "agent_contract": {
     "required_behavior": [
       "treat this repo as harness-only; rollout and tier planning live outside this repo",
-      "read docs/review_workspace_instructions.md for the full review workflow and output contract",
-      "regenerate scaffolded files with build_overrides.sh after scaffold or manifest changes",
-      "use the project review contract under .templates/reviews"
+      "read .workspace/docs/review_workspace_instructions.md for the full review workflow and output contract",
+      "regenerate scaffolded files with .workspace/scripts/build_overrides.sh after scaffold or manifest changes",
+      "use the project review contract under .workspace/templates/reviews"
     ]
   },
   "review_rules": {
@@ -68,10 +69,10 @@
     "not_selected"
   ],
   "schema_contract": {
-    "generic_base_schema": ".templates/reviews/artifact_review.schema.json",
-    "project_profile_schema": ".templates/reviews/codex_harness.review.schema.json",
-    "compatibility_schema": ".templates/reviews/review.schema.json",
-    "project_template": ".templates/reviews/review.json.template",
+    "generic_base_schema": ".workspace/templates/reviews/artifact_review.schema.json",
+    "project_profile_schema": ".workspace/templates/reviews/codex_harness.review.schema.json",
+    "compatibility_schema": ".workspace/templates/reviews/review.schema.json",
+    "project_template": ".workspace/templates/reviews/review.json.template",
     "profile_schema_id": "https://fatb4f.github.io/codex_harness/schemas/codex_harness.review.schema.json",
     "compatibility_schema_id": "https://fatb4f.github.io/codex_harness/schemas/review.schema.json",
     "profile_title": "Codex Harness Artifact Review Profile",
@@ -146,9 +147,9 @@
               "docs/app_server_validation_harness.md:5-6"
             ],
             "code": [
-              "runtime_probe.py:139-146",
-              "runtime_probe.py:684-686",
-              "runtime_probe.py:1111-1113"
+              "src/runtime_probe.py:139-146",
+              "src/runtime_probe.py:684-686",
+              "src/runtime_probe.py:1111-1113"
             ]
           },
           "details": [
@@ -175,9 +176,9 @@
               "docs/app_server_validation_harness.md:175-195"
             ],
             "code": [
-              "runtime_probe.py:867-870",
-              "runtime_probe.py:1021-1070",
-              "runtime_probe.py:1117-1154"
+              "src/runtime_probe.py:867-870",
+              "src/runtime_probe.py:1021-1070",
+              "src/runtime_probe.py:1117-1154"
             ]
           },
           "details": [
@@ -199,7 +200,7 @@
           "title": "shutdown_is_abrupt",
           "evidence": {
             "code": [
-              "runtime_probe.py:201-208"
+              "src/runtime_probe.py:201-208"
             ]
           },
           "details": [
@@ -221,7 +222,7 @@
           "title": "unknown_server_requests_are_brittle",
           "evidence": {
             "code": [
-              "runtime_probe.py:559-610"
+              "src/runtime_probe.py:559-610"
             ]
           },
           "details": [
@@ -243,8 +244,8 @@
           "title": "approval_pass_semantics_are_narrow",
           "evidence": {
             "code": [
-              "runtime_probe.py:576-589",
-              "runtime_probe.py:592-599"
+              "src/runtime_probe.py:576-589",
+              "src/runtime_probe.py:592-599"
             ]
           },
           "details": [

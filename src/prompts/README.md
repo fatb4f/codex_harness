@@ -24,7 +24,7 @@ Recommended prompt files:
 The machine-readable handoff contract is produced by:
 
 ```bash
-python3 runtime_probe.py print-handoff
+python3 src/runtime_probe.py print-handoff
 ```
 
 That command gives the structured execution contract. The prompt files in this
@@ -32,7 +32,7 @@ directory provide the human task framing layered on top of it.
 
 Current default flow:
 
-- run `python3 runtime_probe.py run-baseline`
+- run `python3 src/runtime_probe.py run-baseline`
 - validate the installed `codex app-server` runtime first
 
 Use the workspace `codex-app-server` target only for explicit source-lane

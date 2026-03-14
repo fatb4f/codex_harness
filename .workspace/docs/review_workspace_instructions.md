@@ -1,19 +1,19 @@
 # Review Workspace Instructions
 
-Use this file for the full review workflow. `AGENTS.md` and `project.manifest.json`
+Use this file for the full review workflow. `AGENTS.md` and `.project.manifest.json`
 are entrypoint and contract surfaces, not the full operator instructions.
 
 ## Scaffolding Structure
 
-- `project.manifest.json`
+- `.project.manifest.json`
   Canonical project definitions, scaffold paths, and the project review contract.
-- `build_overrides.sh`
+- `.workspace/scripts/build_overrides.sh`
   Idempotent scaffold generator for `AGENTS.md` and the project-specific review
   schema/template files.
 - `AGENTS.md`
   Thin repo entrypoint that points to the manifest, this instructions file, and
   the scaffold generator.
-- `.templates/reviews/*`
+- `.workspace/templates/reviews/*`
   Scaffolded review schema/template outputs for this project.
 
 ## Review Surface
@@ -29,14 +29,14 @@ Work in the same workspace where the archive is extracted.
 
 ## Priority Files
 
-- `project.manifest.json`
-- `build_overrides.sh`
-- `docs/review_workspace_instructions.md`
-- `runtime_probe.py`
+- `.project.manifest.json`
+- `.workspace/scripts/build_overrides.sh`
+- `.workspace/docs/review_workspace_instructions.md`
+- `src/runtime_probe.py`
 - `README.md`
 - `docs/app_server_validation_harness.md`
-- `validation_samples/baseline/*`
-- `.templates/reviews/*`
+- `src/validation_samples/baseline/*`
+- `.workspace/templates/reviews/*`
 
 `planning/*.json` no longer belongs to this repo. Rollout planning lives in the
 separate `codex_rollout` repo.
@@ -85,6 +85,6 @@ Findings first. Summary second.
 - keep the generic base schema reusable
 - keep the `codex_harness` profile project-specific
 - preserve compatibility when practical
-- after scaffold changes, rerun `./build_overrides.sh`
+- after scaffold changes, rerun `./.workspace/scripts/build_overrides.sh`
 
 Be concise and exact.

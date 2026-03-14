@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-manifest_path="${1:-$repo_root/project.manifest.json}"
-git_root="$(git -C "$repo_root" rev-parse --show-toplevel)"
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+repo_root="$(git -C "$script_dir" rev-parse --show-toplevel)"
+manifest_path="${1:-$repo_root/.project.manifest.json}"
+git_root="$repo_root"
 
 if ! command -v jq >/dev/null 2>&1; then
   echo "jq is required" >&2
@@ -15,8 +16,8 @@ if [[ ! -f "$manifest_path" ]]; then
   exit 1
 fi
 
-if [[ "$git_root" != "$repo_root" ]]; then
-  echo "build_overrides.sh must live at the git root" >&2
+if [[ "$script_dir" != "$repo_root/.workspace/scripts" ]]; then
+  echo "build_overrides.sh must live at .workspace/scripts under the git root" >&2
   exit 1
 fi
 
@@ -151,9 +152,9 @@ agents_tmp="$(mktemp)"
 {
   echo "# AGENTS"
   echo
-  echo "This file is scaffolded from [project.manifest.json](./project.manifest.json) by [build_overrides.sh](./$build_script_path)."
+  echo "This file is scaffolded from [.project.manifest.json](./.project.manifest.json) by [build_overrides.sh](./$build_script_path)."
   echo
-  echo "Read [project.manifest.json](./project.manifest.json) first before doing review, runtime, schema, or planning work in this repo."
+  echo "Read [.project.manifest.json](./.project.manifest.json) first before doing review, runtime, schema, or planning work in this repo."
   echo
   echo "Use [$(basename "$full_instructions_file")](./$full_instructions_file) for the full review workflow and output contract."
   echo
@@ -169,7 +170,7 @@ agents_tmp="$(mktemp)"
   echo
   echo "Use these files:"
   echo
-  printf -- '- [%s](./project.manifest.json)\n' "project.manifest.json"
+  printf -- '- [%s](./.project.manifest.json)\n' ".project.manifest.json"
   printf -- '- [%s](./%s)\n' "$(basename "$generic_base_schema")" "$generic_base_schema"
   printf -- '- [%s](./%s)\n' "$(basename "$project_profile_schema")" "$project_profile_schema"
   printf -- '- [%s](./%s)\n' "$(basename "$compatibility_schema")" "$compatibility_schema"
