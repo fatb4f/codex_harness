@@ -224,10 +224,10 @@ def print_handoff() -> None:
     payload = {
         "target_surface": "codex-web / cloud-worker runtime validation",
         "workspace_root": ".",
-        "runtime_probe": "runtime_probe.py",
+        "runtime_probe": ".workspace/scripts/runtime_probe.sh",
+        "runtime_probe_source": "src/runtime_probe.py",
         "baseline_run_command": [
-            "python3",
-            "runtime_probe.py",
+            "./.workspace/scripts/runtime_probe.sh",
             "run-baseline",
             "--output-dir",
             "<output_dir>",

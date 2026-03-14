@@ -60,6 +60,7 @@ Authoritative source:
 
 - `app-server/tests/common/mcp_process.rs`
 - `src/runtime_probe.py`
+- `.workspace/scripts/runtime_probe.sh`
 
 Purpose:
 
@@ -207,7 +208,8 @@ actually emits deeper server-request behavior.
 
 The default server target is:
 
-- runtime probe: `python3 src/runtime_probe.py`
+- runtime probe wrapper: `./.workspace/scripts/runtime_probe.sh`
+- runtime probe source: `src/runtime_probe.py`
 - command: `codex app-server --listen stdio://`
 
 The optional comparison target is:
@@ -254,11 +256,11 @@ It should:
 
 The runtime probe now supports:
 
-- `python3 src/runtime_probe.py list-sources`
-- `python3 src/runtime_probe.py list-scenarios`
-- `python3 src/runtime_probe.py list-artifacts`
-- `python3 src/runtime_probe.py print-handoff`
-- `python3 src/runtime_probe.py run-baseline --output-dir <dir> [--scenario-groups bootstrap threads] [--server-program /path/to/codex]`
+- `./.workspace/scripts/runtime_probe.sh list-sources`
+- `./.workspace/scripts/runtime_probe.sh list-scenarios`
+- `./.workspace/scripts/runtime_probe.sh list-artifacts`
+- `./.workspace/scripts/runtime_probe.sh print-handoff`
+- `./.workspace/scripts/runtime_probe.sh run-baseline --output-dir <dir> [--scenario-groups bootstrap threads] [--server-program /path/to/codex]`
 
 `run-baseline` writes review-grade JSON and Markdown artifacts into the
 caller-provided output directory with no Rust build step.

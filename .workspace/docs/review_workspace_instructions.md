@@ -10,6 +10,9 @@ are entrypoint and contract surfaces, not the full operator instructions.
 - `.workspace/scripts/build_overrides.sh`
   Idempotent scaffold generator for `AGENTS.md` and the project-specific review
   schema/template files.
+- `.workspace/scripts/runtime_probe.sh`
+  Repo-owned runtime probe entrypoint that sends Python bytecode cache to an
+  XDG cache path outside the git worktree.
 - `AGENTS.md`
   Thin repo entrypoint that points to the manifest, this instructions file, and
   the scaffold generator.
@@ -31,6 +34,7 @@ Work in the same workspace where the archive is extracted.
 
 - `.project.manifest.json`
 - `.workspace/scripts/build_overrides.sh`
+- `.workspace/scripts/runtime_probe.sh`
 - `.workspace/docs/review_workspace_instructions.md`
 - `src/runtime_probe.py`
 - `README.md`
