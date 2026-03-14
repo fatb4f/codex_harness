@@ -18,6 +18,11 @@ The upstream `codex-rs` tree remains a secondary source-authoritative lane for
 branch or regression comparison. This repo owns the runtime probe and handoff
 surface, not the product source tree.
 
+This repo also intentionally excludes rollout tiers, rollout DAGs, and
+cross-surface rollout planning. Those planning artifacts belong in a separate
+rollout repo so the harness archive stays focused on executable validation
+inputs, outputs, and review contracts.
+
 ## Design Rule
 
 Reuse the repo's native components wherever possible:

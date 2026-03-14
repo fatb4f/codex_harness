@@ -8,25 +8,24 @@
     "notes": [
       "Treat the uploaded archive and its extracted workspace as the primary review surface.",
       "Do not assume an installed codex runtime exists.",
-      "Only perform runtime execution when the required runtime is explicitly present and the task calls for it."
+      "Only perform runtime execution when the required runtime is explicitly present and the task calls for it.",
+      "This repo is harness-only. Rollout planning and tier-tracking live outside this repo."
     ]
   },
   "paths": {
-    "root": "/home/_404/src/codex_harness",
-    "docs": "/home/_404/src/codex_harness/docs",
-    "planning": "/home/_404/src/codex_harness/planning",
-    "prompts": "/home/_404/src/codex_harness/prompts",
-    "runtime_probe": "/home/_404/src/codex_harness/runtime_probe.py",
-    "review_templates": "/home/_404/src/codex_harness/.templates/reviews",
-    "baseline_samples": "/home/_404/src/codex_harness/validation_samples/baseline"
+    "root": ".",
+    "docs": "docs",
+    "prompts": "prompts",
+    "runtime_probe": "runtime_probe.py",
+    "review_templates": ".templates/reviews",
+    "baseline_samples": "validation_samples/baseline"
   },
   "priority_files": [
     "README.md",
     "runtime_probe.py",
     "docs/app_server_validation_harness.md",
     "validation_samples/baseline/*",
-    ".templates/reviews/*",
-    "planning/*.json"
+    ".templates/reviews/*"
   ],
   "review_rules": {
     "full_review_in_chat_ui": false,

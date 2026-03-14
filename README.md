@@ -4,6 +4,8 @@ Standalone local repo for the installed-runtime App Server validation harness.
 
 This repo owns:
 - `runtime_probe.py`
+- manifest-backed agent instructions
+- schema-backed review templates
 - handoff and cloud-worker prompts
 - checked-in baseline validation samples
 - harness docs for the runtime-authoritative lane
@@ -11,6 +13,10 @@ This repo owns:
 It validates the installed `codex app-server` surface over stdio and treats the
 upstream `codex-rs` tree as an external source/reference surface, not as the
 home of the harness itself.
+
+Rollout tiers, rollout DAGs, and rollout/harness overlay planning are kept in a
+separate rollout repo on purpose. This repo stays focused on executable harness
+artifacts and their review contract.
 
 ## Primary Commands
 
@@ -27,5 +33,6 @@ This repo is for:
 - runtime validation
 - artifact emission
 - handoff packaging
+- review templates and manifest-backed instructions
 
 This repo is not the upstream product source tree.
