@@ -5,6 +5,7 @@ Standalone local repo for the installed-runtime App Server validation harness.
 This repo owns:
 - `runtime_probe.py`
 - manifest-backed agent instructions
+- dedicated review workspace instructions
 - schema-backed review templates
 - handoff and cloud-worker prompts
 - checked-in baseline validation samples
@@ -20,11 +21,19 @@ artifacts and their review contract.
 
 ## Primary Commands
 
+- `./build_overrides.sh`
 - `python3 runtime_probe.py list-sources`
 - `python3 runtime_probe.py list-scenarios`
 - `python3 runtime_probe.py list-artifacts`
 - `python3 runtime_probe.py print-handoff`
 - `python3 runtime_probe.py run-baseline --output-dir validation_samples/baseline`
+
+Run `./build_overrides.sh` after manifest changes to regenerate the scaffolded
+agent instructions and project-specific review contract files.
+
+Use [docs/review_workspace_instructions.md](./docs/review_workspace_instructions.md)
+for the full review workflow. `AGENTS.md` is intentionally only the repo
+entrypoint.
 
 ## Scope
 

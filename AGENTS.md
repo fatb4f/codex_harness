@@ -1,18 +1,19 @@
 # AGENTS
 
-This repo uses [project.manifest.json](./project.manifest.json) as its local instruction authority.
+This file is scaffolded from [project.manifest.json](./project.manifest.json) by [build_overrides.sh](./build_overrides.sh).
 
-Read that file first before doing review, runtime, schema, or planning work in this repo.
+Read [project.manifest.json](./project.manifest.json) first before doing review, runtime, schema, or planning work in this repo.
+
+Use [review_workspace_instructions.md](./docs/review_workspace_instructions.md) for the full review workflow and output contract.
+
+Regenerate scaffolded files with [build_overrides.sh](./build_overrides.sh).
 
 ## Required behavior
 
 - treat this repo as harness-only; rollout and tier planning live outside this repo
-- treat the extracted archive/workspace as the default review surface
-- do not assume an installed `codex` runtime exists
-- use the review contract under [.templates/reviews](./.templates/reviews)
-- prefer machine-readable outputs first
-- do not emit full review artifacts into chat UI
-- write review artifacts to the internal `/mnt` workspace, archive them there, and return only the link plus a minimal status note in chat
+- read docs/review_workspace_instructions.md for the full review workflow and output contract
+- regenerate scaffolded files with build_overrides.sh after scaffold or manifest changes
+- use the project review contract under .templates/reviews
 
 ## Review contract
 
@@ -23,5 +24,8 @@ Use these files:
 - [codex_harness.review.schema.json](./.templates/reviews/codex_harness.review.schema.json)
 - [review.schema.json](./.templates/reviews/review.schema.json)
 - [review.json.template](./.templates/reviews/review.json.template)
+
+Template root: `.templates/reviews`
+Project id: `codex_harness`
 
 If there is any conflict between ad hoc assumptions and the manifest, follow the manifest.
