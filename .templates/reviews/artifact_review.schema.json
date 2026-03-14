@@ -1,0 +1,358 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fatb4f.github.io/codex_harness/schemas/artifact_review.schema.json",
+  "title": "Generic Artifact Review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_review"
+  ],
+  "properties": {
+    "artifact_review": {
+      "$ref": "#/$defs/artifact_review"
+    }
+  },
+  "$defs": {
+    "non_empty_string": {
+      "type": "string",
+      "minLength": 1
+    },
+    "token": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_./:-]+$"
+    },
+    "token_list": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/token"
+      }
+    },
+    "string_list": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/non_empty_string"
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_name",
+        "review_pass",
+        "assessment"
+      ],
+      "properties": {
+        "artifact_name": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "review_pass": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "assessment": {
+          "$ref": "#/$defs/token"
+        }
+      }
+    },
+    "execution_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "can_run_end_to_end_here",
+        "checked"
+      ],
+      "properties": {
+        "can_run_end_to_end_here": {
+          "type": "boolean"
+        },
+        "blocking_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checked": {
+          "$ref": "#/$defs/token_list"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "can_run_end_to_end_here": {
+                "const": false
+              }
+            },
+            "required": [
+              "can_run_end_to_end_here"
+            ]
+          },
+          "then": {
+            "required": [
+              "blocking_reason"
+            ],
+            "properties": {
+              "blocking_reason": {
+                "$ref": "#/$defs/token"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "overall",
+        "maturity",
+        "main_remaining_risk"
+      ],
+      "properties": {
+        "overall": {
+          "$ref": "#/$defs/token"
+        },
+        "maturity": {
+          "$ref": "#/$defs/token"
+        },
+        "main_remaining_risk": {
+          "$ref": "#/$defs/token"
+        }
+      }
+    },
+    "severity_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "critical",
+        "high",
+        "medium",
+        "low"
+      ],
+      "properties": {
+        "critical": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "high": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "medium": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "low": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "finding_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "confirmed_fix_count",
+        "open_finding_count",
+        "severity_counts"
+      ],
+      "properties": {
+        "confirmed_fix_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "open_finding_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "severity_counts": {
+          "$ref": "#/$defs/severity_counts"
+        }
+      }
+    },
+    "confirmed_fix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "issue",
+        "status",
+        "note"
+      ],
+      "properties": {
+        "issue": {
+          "$ref": "#/$defs/token"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "fixed",
+            "partial",
+            "open"
+          ]
+        },
+        "note": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "docs": {
+          "$ref": "#/$defs/string_list"
+        },
+        "code": {
+          "$ref": "#/$defs/string_list"
+        },
+        "artifacts": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "severity",
+        "status",
+        "title",
+        "details",
+        "impact",
+        "recommended_actions"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^F[0-9]+$"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "open",
+            "fixed",
+            "partial",
+            "deferred",
+            "closed",
+            "needs_review"
+          ]
+        },
+        "title": {
+          "$ref": "#/$defs/token"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "details": {
+          "$ref": "#/$defs/string_list"
+        },
+        "impact": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "recommended_actions": {
+          "$ref": "#/$defs/token_list"
+        }
+      }
+    },
+    "verdict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "reasons"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/token"
+        },
+        "reasons": {
+          "$ref": "#/$defs/token_list"
+        }
+      }
+    },
+    "next_patch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "priority",
+        "title",
+        "why"
+      ],
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "$ref": "#/$defs/token"
+        },
+        "why": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "artifact_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "metadata",
+        "execution_context",
+        "summary",
+        "finding_summary",
+        "confirmed_fixes",
+        "findings",
+        "verdict",
+        "next_patch_set"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "metadata": {
+          "$ref": "#/$defs/metadata"
+        },
+        "execution_context": {
+          "$ref": "#/$defs/execution_context"
+        },
+        "summary": {
+          "$ref": "#/$defs/summary"
+        },
+        "finding_summary": {
+          "$ref": "#/$defs/finding_summary"
+        },
+        "confirmed_fixes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/confirmed_fix"
+          }
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/finding"
+          }
+        },
+        "verdict": {
+          "$ref": "#/$defs/verdict"
+        },
+        "next_patch_set": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/next_patch"
+          }
+        }
+      }
+    }
+  }
+}

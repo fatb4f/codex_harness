@@ -1,0 +1,55 @@
+{
+  "kind": "codex_harness.project_manifest.v1",
+  "project_id": "codex_harness",
+  "scope": "archive_and_workspace_review",
+  "authority": {
+    "primary_surface": "extracted_workspace",
+    "runtime_install_required_by_default": false,
+    "notes": [
+      "Treat the uploaded archive and its extracted workspace as the primary review surface.",
+      "Do not assume an installed codex runtime exists.",
+      "Only perform runtime execution when the required runtime is explicitly present and the task calls for it."
+    ]
+  },
+  "paths": {
+    "root": "/home/_404/src/codex_harness",
+    "docs": "/home/_404/src/codex_harness/docs",
+    "planning": "/home/_404/src/codex_harness/planning",
+    "prompts": "/home/_404/src/codex_harness/prompts",
+    "runtime_probe": "/home/_404/src/codex_harness/runtime_probe.py",
+    "review_templates": "/home/_404/src/codex_harness/.templates/reviews",
+    "baseline_samples": "/home/_404/src/codex_harness/validation_samples/baseline"
+  },
+  "priority_files": [
+    "README.md",
+    "runtime_probe.py",
+    "docs/app_server_validation_harness.md",
+    "validation_samples/baseline/*",
+    ".templates/reviews/*",
+    "planning/*.json"
+  ],
+  "review_rules": {
+    "full_review_in_chat_ui": false,
+    "write_artifacts_to_internal_mnt": true,
+    "archive_outputs_in_mnt": true,
+    "ui_response_mode": "link_only_with_minimal_status",
+    "machine_readable_first": true,
+    "validate_against_schema_before_finalize": true,
+    "findings_order": "severity_desc",
+    "separate_verified_execution_from_inference": true,
+    "do_not_overclaim_coverage": true
+  },
+  "execution_states": [
+    "passed",
+    "partial",
+    "failed",
+    "not_executed",
+    "not_selected"
+  ],
+  "schema_contract": {
+    "generic_base_schema": ".templates/reviews/artifact_review.schema.json",
+    "project_profile_schema": ".templates/reviews/codex_harness.review.schema.json",
+    "compatibility_schema": ".templates/reviews/review.schema.json",
+    "project_template": ".templates/reviews/review.json.template"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fatb4f.github.io/codex_harness/schemas/codex_harness.review.schema.json",
+  "title": "Codex Harness Artifact Review Profile",
+  "allOf": [
+    {
+      "$ref": "./artifact_review.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "artifact_review": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "codex_harness.artifact_review.v1"
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "artifact_name": {
+                  "pattern": "^codex_harness-.*\\.zip$"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "artifact_review": {
+    "kind": "codex_harness.artifact_review.v1",
+    "metadata": {
+      "artifact_name": "codex_harness-main.zip",
+      "review_pass": 3,
+      "assessment": "credible_v1_harness"
+    },
+    "execution_context": {
+      "can_run_end_to_end_here": false,
+      "blocking_reason": "target_codex_app_server_runtime_unavailable",
+      "checked": [
+        "archive_unpacked",
+        "runtime_probe_py_reviewed",
+        "readme_reviewed",
+        "docs_reviewed",
+        "baseline_samples_reviewed",
+        "python_compile_check_passed"
+      ]
+    },
+    "summary": {
+      "overall": "meaningfully_improved",
+      "maturity": "closer_to_review_grade",
+      "main_remaining_risk": "reproducibility_and_contract_precision"
+    },
+    "finding_summary": {
+      "confirmed_fix_count": 4,
+      "open_finding_count": 5,
+      "severity_counts": {
+        "critical": 0,
+        "high": 1,
+        "medium": 4,
+        "low": 0
+      }
+    },
+    "confirmed_fixes": [
+      {
+        "issue": "approvals_false_green_behavior",
+        "status": "fixed",
+        "note": "Approvals now report partial instead of pass when only discovery occurs."
+      },
+      {
+        "issue": "thread_list_first_page_hard_failure",
+        "status": "fixed",
+        "note": "First-page absence no longer hard-fails the scenario."
+      },
+      {
+        "issue": "synthetic_persistence_and_event_artifacts",
+        "status": "fixed",
+        "note": "Artifacts are now execution-derived."
+      },
+      {
+        "issue": "stderr_not_captured",
+        "status": "fixed",
+        "note": "stderr is now captured and emitted into artifacts."
+      }
+    ],
+    "findings": [
+      {
+        "id": "F1",
+        "severity": "high",
+        "status": "open",
+        "title": "runtime_state_not_isolated",
+        "evidence": {
+          "docs": [
+            "docs/app_server_validation_harness.md:5-6"
+          ],
+          "code": [
+            "runtime_probe.py:139-146",
+            "runtime_probe.py:684-686",
+            "runtime_probe.py:1111-1113"
+          ]
+        },
+        "details": [
+          "The docs claim the harness can be executed reproducibly by a cloud worker.",
+          "The runtime process still inherits the ambient environment.",
+          "The threads and persistence packs still create non-ephemeral state.",
+          "Repeated runs can therefore depend on and mutate prior runtime state."
+        ],
+        "impact": "Behavior can drift across runs even when code is unchanged.",
+        "recommended_actions": [
+          "run_under_temporary_home",
+          "set_temporary_xdg_directories",
+          "emit_state_root_in_artifacts",
+          "guard_state_preservation_behind_keep_state_flag"
+        ]
+      },
+      {
+        "id": "F2",
+        "severity": "medium",
+        "status": "open",
+        "title": "docs_overclaim_runtime_coverage",
+        "evidence": {
+          "docs": [
+            "docs/app_server_validation_harness.md:175-195"
+          ],
+          "code": [
+            "runtime_probe.py:867-870",
+            "runtime_probe.py:1021-1070",
+            "runtime_probe.py:1117-1154"
+          ]
+        },
+        "details": [
+          "Turns docs still imply interrupt and plan-item runtime coverage, but interrupt remains source-lane only.",
+          "Approvals docs imply zsh fork subcommand approvals, but the runtime lane is still prompt-driven surfacing of approval and user-input requests.",
+          "Persistence docs imply rollout materialization and state readback, but the actual runtime check is thread/metadata/update plus thread/read."
+        ],
+        "impact": "Reviewers can infer broader validation coverage than the harness currently proves.",
+        "recommended_actions": [
+          "split_runtime_baseline_coverage_docs",
+          "add_source_lane_reference_coverage_section",
+          "add_runtime_expansion_targets_section"
+        ]
+      },
+      {
+        "id": "F3",
+        "severity": "medium",
+        "status": "open",
+        "title": "shutdown_is_abrupt",
+        "evidence": {
+          "code": [
+            "runtime_probe.py:201-208"
+          ]
+        },
+        "details": [
+          "finish() still closes stdin and then kills the child process immediately.",
+          "This can truncate late stderr, final notifications, or useful shutdown behavior."
+        ],
+        "impact": "Failure diagnostics and end-of-run observability remain weaker than necessary.",
+        "recommended_actions": [
+          "close_stdin",
+          "wait_briefly_for_clean_exit",
+          "terminate_on_timeout",
+          "kill_only_as_final_fallback"
+        ]
+      },
+      {
+        "id": "F4",
+        "severity": "medium",
+        "status": "open",
+        "title": "unknown_server_requests_are_brittle",
+        "evidence": {
+          "code": [
+            "runtime_probe.py:559-610"
+          ]
+        },
+        "details": [
+          "Unknown server-initiated methods currently receive -32601 method not found.",
+          "That makes the harness brittle against protocol evolution."
+        ],
+        "impact": "A forward-compatible runtime change can look like a regression even when the required surface still works.",
+        "recommended_actions": [
+          "record_unknown_requests_as_findings",
+          "capture_method_name_and_param_shape",
+          "downgrade_to_partial_or_needs_review",
+          "hard_fail_only_when_required_path_is_blocked"
+        ]
+      },
+      {
+        "id": "F5",
+        "severity": "medium",
+        "status": "open",
+        "title": "approval_pass_semantics_are_narrow",
+        "evidence": {
+          "code": [
+            "runtime_probe.py:576-589",
+            "runtime_probe.py:592-599"
+          ]
+        },
+        "details": [
+          "Approval handlers currently resolve requests with empty grants or decline actions.",
+          "A passed approvals pack therefore proves surfacing and resolution of the request-response loop.",
+          "It does not prove a positive grant path executed successfully."
+        ],
+        "impact": "Readers may interpret approval pass as a stronger guarantee than the code actually provides.",
+        "recommended_actions": [
+          "narrow_docs_to_approval_surfacing_and_roundtrip",
+          "add_future_positive_grant_path_pack"
+        ]
+      }
+    ],
+    "verdict": {
+      "status": "credible_v1_but_not_yet_review_grade",
+      "reasons": [
+        "state_isolation_missing",
+        "docs_overstate_runtime_covered_surface",
+        "shutdown_is_still_abrupt",
+        "unknown_server_requests_are_brittle",
+        "approval_pass_semantics_are_narrower_than_implied"
+      ]
+    },
+    "next_patch_set": [
+      {
+        "priority": 1,
+        "title": "isolate_runtime_state",
+        "why": "Most important blocker to reproducibility."
+      },
+      {
+        "priority": 2,
+        "title": "rewrite_scenario_coverage_docs",
+        "why": "Align documented coverage with actual runtime behavior."
+      },
+      {
+        "priority": 3,
+        "title": "make_shutdown_graceful_first",
+        "why": "Improves observability with small implementation cost."
+      },
+      {
+        "priority": 4,
+        "title": "downgrade_unknown_requests_to_structured_findings",
+        "why": "Improves forward compatibility."
+      },
+      {
+        "priority": 5,
+        "title": "narrow_approval_semantics_in_docs",
+        "why": "Prevents another overclaim gap."
+      }
+    ]
+  }
+}
