@@ -2,9 +2,9 @@
 set -euo pipefail
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-repo_root="$(git -C "$script_dir" rev-parse --show-toplevel)"
+repo_root="$(cd "$script_dir/../.." && pwd)"
 manifest_path="${1:-$repo_root/.project.manifest.json}"
-git_root="$repo_root"
+workspace_root="$repo_root"
 
 if ! command -v jq >/dev/null 2>&1; then
   echo "jq is required" >&2
@@ -17,7 +17,7 @@ if [[ ! -f "$manifest_path" ]]; then
 fi
 
 if [[ "$script_dir" != "$repo_root/.workspace/scripts" ]]; then
-  echo "build_overrides.sh must live at .workspace/scripts under the git root" >&2
+  echo "build_overrides.sh must live at .workspace/scripts under the workspace root" >&2
   exit 1
 fi
 
@@ -42,7 +42,7 @@ require_repo_relative_path() {
   local value="$2"
   case "$value" in
     ""|/*|~*|..|../*|*/../*|*/..|*//*) 
-      echo "manifest path must be relative to git_root: $label=$value" >&2
+      echo "manifest path must be relative to workspace_root: $label=$value" >&2
       exit 1
       ;;
   esac
@@ -52,7 +52,7 @@ validate_manifest_paths() {
   local root_path
   root_path="$(require_manifest_string '.paths.root')"
   if [[ "$root_path" != "." ]]; then
-    echo "paths.root must be '.' to denote git_root: $root_path" >&2
+    echo "paths.root must be '.' to denote workspace_root: $root_path" >&2
     exit 1
   fi
 
@@ -186,6 +186,6 @@ write_if_changed "$agents_path" "$agents_tmp"
 echo "Scaffolded:"
 printf '  %s\n' \
   "$agents_path" \
-  "$repo_root/$project_profile_schema" \
-  "$repo_root/$compatibility_schema" \
-  "$repo_root/$project_template"
+  "$workspace_root/$project_profile_schema" \
+  "$workspace_root/$compatibility_schema" \
+  "$workspace_root/$project_template"

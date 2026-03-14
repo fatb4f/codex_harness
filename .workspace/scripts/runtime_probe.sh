@@ -2,7 +2,7 @@
 set -euo pipefail
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-repo_root="$(git -C "$script_dir" rev-parse --show-toplevel)"
+repo_root="$(cd "$script_dir/../.." && pwd)"
 cache_root="${XDG_CACHE_HOME:-$HOME/.cache}/codex_harness/pycache"
 
 mkdir -p "$cache_root"
